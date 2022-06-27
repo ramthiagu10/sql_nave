@@ -1,0 +1,473 @@
+   drop database attendance_portal;
+create database attendance_portal;
+use attendance_portal;
+CREATE TABLE attendance_table (
+    Attendance_ID INT(11) NOT NULL AUTO_INCREMENT,
+    Emp_ID INT NOT NULL,
+    Date_ DATE,
+    Time_in TIME,
+    Time_out TIME,
+    Shift_timing VARCHAR(20),
+    Effective_hours VARCHAR(20),
+    Employee_status VARCHAR(20),
+    Request_Id VARCHAR(20),
+    PRIMARY KEY (Attendance_ID)
+);
+CREATE TABLE Employee_detail (
+    Emp_id INT PRIMARY KEY,
+    first_name VARCHAR(15),
+    last_name VARCHAR(15),
+    date_of_birth DATE,
+    date_of_hire DATE,
+    Designation VARCHAR(20),
+    Dept_Id INT,
+    manager_id INT,
+    contact_num INT,
+    Email_ID VARCHAR(30)
+);
+
+CREATE TABLE leave_detail (
+    Leave_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Req_ID VARCHAR(10) UNIQUE,
+    Employee_ID INT NOT NULL,
+    Leave_opening INT NOT NULL,
+    Type_of_leave VARCHAR(20),
+    Fom_date DATE NOT NULL,
+    To_date DATE NOT NULL,
+    day_count INT NOT NULL,
+    Approver_id INT,
+    Leave_status VARCHAR(20),
+    FOREIGN KEY (Employee_ID)
+        REFERENCES Employee_detail (Emp_id)
+        ON DELETE CASCADE
+);
+CREATE TABLE Permission_Detail (
+    Permission_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Req_ID VARCHAR(10) UNIQUE,
+    Employee_ID INT NOT NULL,
+    permission_date DATE,
+    Hours_remaining INT NOT NULL,
+    From_time TIME NOT NULL,
+    To_time TIME NOT NULL,
+    hours_count INT,
+    Approver_id INT,
+    Permission_status VARCHAR(20)
+);
+CREATE TABLE Departmaent_Detail (
+    Dept_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Dept_name VARCHAR(20) NOT NULL,
+    Manager_ID INT UNIQUE,
+    Manager_name VARCHAR(20)
+);
+insert into attendance_table(Attendance_ID,Emp_ID,Date_,Time_in,
+Time_out,Shift_timing,Effective_hours,Employee_status,Request_Id)
+values
+(1,4001,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(2,4002,'2021-02-11','10:00','19:00','10am-7pm','09:00','Present','-'),
+(3,4003,'2021-02-11','09:00','18:00','9am-6pm','00:00','Absent','PR01'),
+(4,4004,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','PR02'),
+(5,4005,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(6,4006,'2021-02-11','09:00','15:00','9am-6pm','06:00','Present-half_day','PR03'),
+(7,4007,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(8,4008,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(9,4009,'2021-02-11','10:00','19:00','10am-7pm','09:00','Present','PR04'),
+(10,4010,'2021-02-11','11:00','20:00','11am-8pm','09:00','Present','-'),
+(11,4011,'2021-02-11','11:00','20:00','11am-8pm','00:00','Absent','PR05'),
+(12,4012,'2021-02-11','10:00','19:00','10am-7pm','09:00','Present','-'),
+(13,4013,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(14,4014,'2021-02-11','11:00','20:00','11am-8pm','09:00','Present','PR06'),
+(15,4015,'2021-02-11','10:00','19:00','10am-7pm','09:00','Present','-'),
+(16,4016,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(17,4017,'2021-02-11','10:00','16:00','10am-7pm','06:00','Present-half_day','PR07'),
+(18,4018,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(19,4019,'2021-02-11','09:00','18:00','9am-6pm','09:00','Present','-'),
+(20,4020,'2021-02-11','10:00','19:00','10am-7pm','00:00','Absent','PR08'),
+(21,4001,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(22,4002,'2021-02-12','10:00','19:00','10am-7pm','09:00','Present','-'),
+(23,4003,'2021-02-12','09:00','18:00','9am-6pm','00:00','Absent','PR01'),
+(24,4004,'2021-02-12','12:00','18:00','9am-6pm','06:00','Present-half_day','PR09'),
+(25,4005,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(26,4006,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(27,4007,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(28,4008,'2021-02-12','09:00','18:00','9am-6pm','00:00','Absent','PR10'),
+(29,4009,'2021-02-12','10:00','19:00','10am-7pm','09:00','Present','-'),
+(30,4010,'2021-02-12','11:00','20:00','11am-8pm','09:00','Present','PR11'),
+(31,4011,'2021-02-12','11:00','20:00','11am-8pm','09:00','Present','-'),
+(32,4012,'2021-02-12','10:00','19:00','10am-7pm','09:00','Present','-'),
+(33,4013,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(34,4014,'2021-02-12','03:00','20:00','11am-8pm','06:00','Present-half_day','PR12'),
+(35,4015,'2021-02-12','10:00','19:00','10am-7pm','09:00','Present','-'),
+(36,4016,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(37,4017,'2021-02-12','10:00','19:00','10am-7pm','09:00','Present','PR13'),
+(38,4018,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(39,4019,'2021-02-12','09:00','18:00','9am-6pm','09:00','Present','-'),
+(40,4020,'2021-02-12','10:00','19:00','10am-7pm','00:00','Absent','PR08');
+
+insert into departmaent_detail(Dept_ID,Dept_name,Manager_ID,Manager_name)
+values(101,'Operations',4001,'Kali charan'),
+(102,'Finance',4003,'Maya kanan'),
+(103,'Sales',4010,'Kavitha kumari'),
+(104,'HR',4005,'Shivam mavi'),
+(105,'Marketing',4002,'Aditiya varma');
+alter table employee_detail
+modify column contact_num varchar(55);
+ALTER TABLE employee_detail 
+MODIFY COLUMN Designation VARCHAR(60);
+insert into employee_detail(Emp_id,first_name,last_name,date_of_birth,date_of_hire,
+Designation,Dept_Id,manager_id,contact_num,Email_ID)
+values(
+4001,'Kali','charan','1979-12-13','2018-01-10','Manager',101,null,6214985548,'Kalicharan@gmail.com'),
+(4002,'Aditya','vrama','1980-05-14','2018-01-10','Manager',105,null,9526345612,'Adityavrama@gmail.com'),
+(4003,'Maya','kanan','1985-01-01','2018-01-10','Manager',102,null,6214346214,'Mayakanan@gmail.com'),
+(4004,'Anjali','nair','1998-04-16','2018-01-10','sales engineer',104,4005,6932156724,'Anjalinair@gmail.com'),
+(4005,'Shivam','mavi','1987-08-23','2018-01-10','Manager',104,null,7895642310,'Shivammavi@gmail.com'),
+(4006,'Aravind','subramani','1993-03-27','2019-04-12','Sr.software engineer',101,4001,9652354162,'Aravindsubramani@gmail.com'),
+(4007,'Ashwin','raj','1995-07-15','2019-04-13','software engineer',101,4001,8225698175,'Ashwinraj@gmail.com'),
+(4008,'Sneha','roy','1999-02-28','2019-04-14','software engineer',101,4001,6214985214,'Sneharoy@gmail.com'),
+(4009,'Raj','kamal','1993-09-08','2020-01-14','Accountant',102,4003,7852354162,'Rajkamal@gmail.com'),
+(4010,'Kavitha','kumari','1982-04-30','2020-05-02','Manager',103,null,8336559640,'Kavithakumari@gmail.com'),
+(4011,'Nawas','sharif','1985-07-11','2020-05-02','sales executive',103,4010,8336559656,'Nawassharif@gmail.com'),
+(4012,'Abhishek','shing','1995-05-09','2020-05-02','Asistant accountant',102,4003,8862354162,'Abhishekshing@gmail.com'),
+(4013,'John','wick','1987-12-25','2020-10-15','Sr.HR',104,4005,8336559648,'Johnwick@gmail.com'),
+(4014,'Prachi','desai','1997-08-20','2020-05-02','sales engineer',103,4010,8336559326,'Prachidesai@gmail.com'),
+(4015,'Saravana','babu','1992-04-08','2020-10-15','Marketing analyst',105,4002,8225652417,'Saravanababu@gmail.com'),
+(4016,'Richa','rao','1996-02-19','2020-10-15','Junior HR',104,4005,6932156782,'Richarao@gmail.com'),
+(4017,'Praveen','kumar','1990-11-12','2020-10-15','Marketing consultant',105,4002,8225698178,'Praveenkumar@gmail.com'),
+(4018,'Ajay','ratnam','1991-07-24','2021-01-23','software engineer',101,4001,6932156735,'Ajayratnam@gmail.com'),
+(4019,'Sundara','moorthy','2000-06-10','2021-01-28','Junior HR',104,4005,9945681789,'Sundaramoorthy@gmail.com'),
+(4020,'Karthik','raja','1987-01-28','2021-01-30','Marketing coordinator',105,4002,9945682689,'Karthikraja@gmail.com');
+
+insert into leave_detail(Leave_ID,Req_ID,Employee_ID,Leave_opening,Type_of_leave,Fom_date,To_date,day_count,Approver_id,Leave_status)
+values(1,'PR01',4003,6,'PL','2021-02-11','2021-02-12',2,null,'Approved'),
+(2,'PR02',4004,5,'CL','2021-02-11','2021-02-11',0,4005,'Unapproved'),
+(3,'PR04',4009,6,'CL','2021-02-11','2021-02-11',0,4003,'Unapproved'),
+(4,'PR05',4011,4,'CL','2021-02-11','2021-02-11',1,4010,'Approved'),
+(5,'PR08',4020,6,'PL','2021-02-11','2021-02-12',2,4002,'Approved'),
+(6,'PR10',4008,3,'PL','2021-02-12','2021-02-12',1,4001,'Approved'),
+(7,'PR13',4017,1,'CL','2021-02-12','2021-02-12',0,4002,'Unapproved');
+
+-- truncate table permission_detail;
+
+insert into permission_detail(Permission_ID,Req_ID,Employee_ID,permission_date,
+Hours_remaining,From_time,To_time,hours_count,Approver_id,Permission_status)
+values(1,'PR03',4006,'2021-02-11',9,'15:00','18:00',3,4001,'Approved'),
+(2,'PR06',4014,'2021-02-11',3,'09:00','12:00',0,4010,'Unapproved'),
+(3,'PR07',4017,'2021-02-11',6,'16:00','19:00',3,4002,'Approved'),
+(4,'PR09',4004,'2021-02-12',9,'09:00','12:00',3,4005,'Approved'),
+(5,'PR11',4010,'2021-02-12',3,'15:00','18:00',0,null,'Unapproved'),
+(6,'PR12',4014,'2021-02-12',9,'12:00','15:00',3,4010,'Approved');
+
+-- SQl Joins excercise
+
+-- inner join and left join combined
+-- the person who applied both leave and permission, one have been approved and another is denied
+
+SELECT
+  ed.first_name,
+  ed.Dept_id,
+  ad.Emp_id,
+  ad.Date_,
+  ad.Shift_timing,
+  ad.employee_status,
+  ld.day_count,
+  pd.hours_count,
+  ld.leave_status,
+  pd.Permission_status
+FROM attendance_table ad
+  JOIN emp_detail ed ON ad.emp_id = ed.emp_id
+  JOIN leave_detail ld ON ed.emp_id = ld.employee_id
+  join permission_detail pd on ad.Request_id=pd.Req_ID
+WHERE
+  (pd.Permission_status = 'Approved'
+  AND ld.leave_status = 'Unapproved')or(pd.Permission_status = 'Unapproved'
+ AND ld.leave_status = 'Approved'); 
+
+SELECT 
+    ad.emp_id,
+    ad.employee_status,
+    ad.shift_timing,
+    ld.type_of_leave,
+    ld.day_count,
+    ld.leave_status,
+    ed.first_name,
+    ed.last_name
+FROM
+    attendance_table ad
+        JOIN
+    leave_detail ld ON ad.request_id = ld.req_id
+        LEFT JOIN
+    employee_detail ed ON ld.employee_ID = ed.Emp_id;
+    
+-- inner join
+    
+SELECT 
+    pd.permission_date,
+    pd.hours_remaining,
+    pd.permission_status,
+    ad.shift_timing,
+    ad.emp_id,
+    ad.employee_status
+FROM
+    permission_detail pd
+		JOIN
+    attendance_table ad ON pd.req_id = ad.request_id;
+
+-- Right Join
+    
+ SELECT 
+    dd.manager_name,
+    ed.contact_num,
+    ed.Email_id,
+    dd.dept_name,
+    dd.dept_id
+FROM
+    employee_detail ed
+        RIGHT JOIN
+    departmaent_detail dd ON ed.emp_id = dd.manager_id;
+SELECT 
+    ad.emp_id,
+    ad.employee_status,
+    ad.shift_timing,
+    pd.permission_date,
+    pd.hours_remaining,
+    pd.permission_status
+FROM
+    attendance_table ad
+        right JOIN
+    permission_detail pd ON ad.request_id = pd.req_id 
+UNION SELECT 
+    ad.emp_id,
+    ad.employee_status,
+    ad.shift_timing,
+    ld.type_of_leave,
+    ld.day_count,
+    ld.leave_status
+FROM
+    attendance_table ad
+       right JOIN
+    leave_detail ld ON ad.request_id = ld.req_id;
+    
+select * from attendance_table 
+where request_id like'P%';
+
+use attendance_portal;
+
+-- sub queries
+
+CREATE TABLE total_req AS (SELECT * FROM
+    attendance_table
+WHERE
+    request_id LIKE 'PR%');
+-- drop table total_req;
+select * from total_req;
+
+-- creating salary column and its values in a new table using
+-- sub query and case statement
+
+create table Emp_detail as(SELECT *,
+    CASE
+        WHEN designation = 'Manager' THEN 70000
+        WHEN designation LIKE 'Sr%' THEN 50000
+        when designation = 'Accountant' then 57000
+        when designation = 'Asistant accountant' then 40000
+        when designation ='Marketing coordinator' then 52000
+        when designation ='software engineer' then 30000
+        when designation = 'sales executive' then 45000
+        ELSE 22000
+        
+    END AS salary
+FROM
+    employee_detail);
+select *from emp_detail;
+
+
+-- create procedure total_req (attendance_table)
+-- begin
+-- SELECT * FROM
+--     attendance_table
+-- WHERE
+--     reqest_id LIKE 'PR%';
+--     end
+
+-- extracting first_name,designation which has salary above the avg salary
+
+SELECT first_name,designation, salary
+FROM emp_detail
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM emp_detail
+);
+    
+    
+ --    Extracting first_name,last_name and contact_num who approved per
+SELECT first_name, last_name,contact_num
+FROM emp_detail
+WHERE emp_id IN (
+    SELECT Approver_id
+    FROM permission_detail
+);
+
+-- query the employee who has denied leave and permission approved by joining three columns
+
+SELECT 
+    ed.emp_id,
+    ld.leave_opening,
+    ld.type_of_leave,
+    ld.leave_status,
+    ld.fom_date,
+    ed.first_name,
+    ed.contact_num,
+    pd.permission_date,
+    pd.permission_status
+FROM
+    leave_detail ld
+        JOIN
+    emp_detail ed ON ld.employee_id = ed.emp_id
+        RIGHT JOIN
+    permission_detail pd ON ed.emp_id = pd.employee_id;
+    
+    -- string functions
+   --  concat first_name and last_name
+   
+    select * ,concat(first_name,' ',last_name) as full_name from emp_detail;
+    
+   -- concat  first_name in capital_letter and  last_name in small_letter 
+   
+SELECT 
+    CONCAT(UPPER(first_name),
+            ' @*2 ',
+            reverse(last_name))
+FROM
+    emp_detail;
+    
+SELECT 
+    CONCAT(lower(first_name),
+            '(',
+            (UPPER(SUBSTR(last_name, 1, 2))),
+            ')') AS LA
+FROM
+    emp_detail;
+    
+SELECT 
+    email_Id
+FROM
+    emp_detail
+WHERE
+    email_id LIKE 'S%';
+    
+-- Date_time functions
+    
+SELECT 
+    CURDATE() AS date_now, date_of_birth
+FROM
+    emp_detail;
+
+SELECT 
+    *,
+    (SELECT ROUND(DATEDIFF(CURDATE(), date_of_birth) / 365)) AS age
+FROM
+    emp_detail;
+    
+(SELECT 
+    *,
+    (SELECT ROUND(DATEDIFF(CURDATE(), date_of_hire) / 12)) AS Exp_withIn_company
+FROM
+    emp_detail);
+    
+  SELECT DISTINCT
+    YEAR(date_of_birth) AS birth_year
+FROM
+    emp_detail
+ORDER BY birth_year;
+
+     
+SELECT 
+    *,
+    (SELECT DAYNAME(date_of_hire)) AS join_day,
+    (SELECT MONTHNAME(date_of_hire)) AS month_of_joining,
+    (SELECT ROUND(DATEDIFF(CURDATE(), date_of_hire) / 365)) AS Exp_withIn_company,
+    (SELECT ROUND(DATEDIFF(CURDATE(), date_of_birth) / 365)) AS age
+FROM
+    emp_detail;
+
+SELECT 
+    *
+FROM
+    departmaent_detail;
+
+-- timediff function
+
+SELECT 
+    emp_id,
+    shift_timing,
+    Employee_status,
+    permission_date,
+    permission_status,
+    TIMEDIFF(time_out, time_in) AS working_hours,
+    timediff(to_time,from_time) as permission_hours,
+    hours_remaining
+FROM
+	Attendance_table
+    join permission_detail on 
+    request_id=req_id where permission_status='Approved' order by hours_remaining;
+    
+    
+SELECT 
+    first_name
+FROM
+    emp_detail
+GROUP BY first_name
+HAVING COUNT(first_name) = 1;
+
+SELECT
+  emp_id,
+  first_name
+FROM emp_detail
+WHERE first_name LIKE '____%s';
+
+create procedure age_cal(date_of_birth date)
+
+DELIMITER &&  
+CREATE PROCEDURE age_cal()  
+BEGIN  
+    SELECT 
+    *,
+    (SELECT ROUND(DATEDIFF(CURDATE(), date_of_birth) / 365)) AS age
+FROM
+    emp_detail;   
+END &&  
+DELIMITER ; 
+     
+ call age_cal;
+ 
+ USE `attendance_portal`;
+DROP procedure IF EXISTS `age_calc`;
+
+DELIMITER $$
+USE `attendance_portal`$$
+CREATE PROCEDURE `age_calc` ( in date_of_birth date)
+BEGIN 
+select ROUND(DATEDIFF(CURDATE(), date_of_birth) / 365) AS age
+from emp_detail;
+
+END$$
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `display_max_salary`;
+DELIMITER &&  
+CREATE PROCEDURE display_max_salary (OUT highest_salary INT)  
+BEGIN  
+    SELECT MAX(salary) INTO highest_salary FROM emp_detail order by Dept_id
+   ;   
+END &&  
+DELIMITER ;  
+
+call display_max_salary(@M);
+
+
+select COUNT(*) AS salary_in_group,
+round(salary / 10 * 10) AS salary_group
+FROM emp_detail
+GROUP BY salary_group
+ORDER BY salary_group asc;
